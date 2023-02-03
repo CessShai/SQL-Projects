@@ -1,77 +1,77 @@
-select * from diamond_prices;
+SELECT * FROM diamond_prices;
 
 /*1 How many total diamonds are on the list?*/
-select count(carat) as total_diamonds
- from diamond_prices;
+SELECT COUNT(carat) AS total_diamonds
+ FROM diamond_prices;
  
 /*2 Rank the diamonds based on its carat.*/
-select carat, rank() over(order by carat desc) as rnk
- from diamond_prices
- group by carat;
+SELECT carat, rank() over(ORDER BY carat DESC) AS rnk
+ FROM diamond_prices
+ GROUP BY carat;
  
 /*3 Determine the carat with highest no. of diamonds.*/
-select carat, count(carat) as no_per_carat, rank() over(order by carat desc) as rnk
- from diamond_prices
- group by carat
- order by no_per_carat desc
- limit 10;
+SELECT carat, COUNT(carat) AS no_per_carat, rank() over(ORDER BY carat DESC) AS rnk
+ FROM diamond_prices
+ GROUP BY carat
+ ORDER BY no_per_carat DESC
+ LIMIT 10;
  
 /*4 Determine the carat with lowest no. of diamonds.*/
-select carat, count(carat) as no_per_carat, rank() over(order by carat desc) as rnk
- from diamond_prices
- group by carat
- order by no_per_carat asc
- limit 10;
+SELECT carat, COUNT(carat) AS no_per_carat, rank() over(ORDER BY carat DESC) AS rnk
+ FROM diamond_prices
+ GROUP BY carat
+ ORDER BY no_per_carat ASC
+ LIMIT 10;
  
 /*5 Determine the no. of diamonds per cut.*/
-select cut, count(cut) as no_per_cut
- from diamond_prices
- group by cut
- order by no_per_cut desc;
+SELECT cut, COUNT(cut) AS no_per_cut
+ FROM diamond_prices
+ GROUP BY cut
+ ORDER BY no_per_cut DESC;
  
 /*6 Determine the no. of diamonds per color.*/
-select color, count(color) as no_per_color
- from diamond_prices
- group by color
- order by no_per_color desc;
+SELECT color, COUNT(color) AS no_per_color
+ FROM diamond_prices
+ GROUP BY color
+ ORDER BY no_per_color DESC;
  
  /*7 Determine the no. of diamonds per clarity.*/
-select clarity, count(clarity) as no_per_clarity
- from diamond_prices
- group by clarity
- order by no_per_clarity desc;
+SELECT clarity, COUNT(clarity) AS no_per_clarity
+ FROM diamond_prices
+ GROUP BY clarity
+ ORDER BY no_per_clarity DESC;
  
   /*8 Determine the no. of diamonds per depth.*/
-select depth, count(depth) as no_per_depth
- from diamond_prices
- group by depth
- order by no_per_depth desc;
+SELECT depth, COUNT(depth) AS no_per_depth
+ FROM diamond_prices
+ GROUP BY depth
+ ORDER BY no_per_depth DESC;
  
    /*9 Determine the no. of diamonds per table.*/
-select table_dia, count(table_dia) as no_per_table
- from diamond_prices
- group by table_dia
- order by no_per_table desc;
+SELECT table_dia, COUNT table_dia) AS no_per_table
+ FROM diamond_prices
+ GROUP BY table_dia
+ ORDER BY no_per_table DESC;
  
     /*10 What is the 3 most expensive diamonds.*/
-select *, rank() over(order by price desc) as rnk
- from diamond_prices
- order by rnk
- limit 3;
+SELECT *, rank() over(ORDER BY price DESC) AS rnk
+ FROM diamond_prices
+ ORDER BY rnk
+ LIMIT 3;
  
      /*11 What is the 3 least expensive diamonds.*/
-select *, row_number() over(order by price) as rnk
- from diamond_prices
- order by rnk
- limit 3;
+SELECT *, row_number() over(ORDER BY price) AS rnk
+ FROM diamond_prices
+ ORDER BY rnk
+ LIMIT 3;
  
      /*12 What is the price of most expensive diamond per carat.*/
-select *, rank() over(order by carat desc) as rnk_carat
-from (select carat, price as highest_price, row_number() over(partition by carat order by price desc) as rnk_price
- from diamond_prices
- order by rnk_price)x
-where  rnk_price = 1
-order by highest_price;
+SELECT *, rank() over(ORDER BY carat DESC) AS rnk_carat
+FROM (SELECT carat, price AS highest_price, row_number() over(partition BY carat ORDER BY price DESC) AS rnk_price
+ FROM diamond_prices
+ ORDER BY rnk_price)x
+WHERE  rnk_price = 1
+ORDER BY highest_price;
  
 
 
