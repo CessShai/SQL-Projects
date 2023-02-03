@@ -1,96 +1,96 @@
-select * from anime;
+SELECT * From anime;
 
 /*1 How many anime on the list?*/
-select count(anime_name) as total_anime
- from anime;
+SELECT COUNT(anime_name) AS total_anime
+ FROM anime;
  
  /*2 Top 10 anime based on score*/
-select anime_name, ranking, score
-	from anime
-    order by score desc
-    limit 10;
+SELECT anime_name, ranking, score
+	FROM anime
+    ORDER BY score DESC
+    LIMIT 10;
     
  /*3 Top 10 anime movie based on score*/
- select anime_name, score, episodes
-	from Anime
-    where episodes = 1
-    order by score desc
-    limit 10;
+ SELECT anime_name, score, episodes
+	FROM Anime
+    WHERE episodes = 1
+    ORDER BY score DESC
+    LIMIT 10;
     
  /*4 Top 10 anime series based on score*/
- select anime_name, score, episodes
-	from anime
-    where episodes != 1
-    order by score desc
-    limit 10;
+ SELECT anime_name, score, episodes
+	FROM anime
+    WHERE episodes != 1
+    ORDER BY score DESC
+    LIMIT 10;
     
  /*5 Top 10 anime based on popularity (score is not null)*/
-select anime_name, popularity, score
-	from anime
-    where score != 0
-    order by popularity desc
-    limit 10;
+SELECT anime_name, popularity, score
+	FROM anime
+    WHERE score != 0
+    ORDER BY popularity DESC
+    LIMIT 10;
 
  /*6 Top 10 anime movie based on popularity (score is not null)*/
-select anime_name, popularity, score, episodes
-	from anime
-	where episodes = 1 and score != 0
-    order by popularity desc
-    limit 10;
+SELECT anime_name, popularity, score, episodes
+	FROM anime
+	WHERE episodes = 1 and score != 0
+    ORDER BY popularity DESC
+    LIMIT 10;
     
  /*6 Top 10 anime series based on popularity (score is not null)*/
-select anime_name, popularity, score, episodes
-	from anime
-	where episodes > 1 and score != 0
-    order by popularity desc
-    limit 10;
+SELECT anime_name, popularity, score, episodes
+	FROM anime
+	WHERE episodes > 1 and score != 0
+    ORDER BY popularity DESC
+    LIMIT 10;
     
  /*7 Top 10 ongoing anime series based on score*/
-select anime_name, score, episodes
-	from anime
-	where episodes = 0
-    order by score desc
-    limit 10;
+SELECT anime_name, score, episodes
+	FROM anime
+	WHERE episodes = 0
+    ORDER BY score DESC
+    LIMIT 10;
     
  /*8 Top 10 anime comedy series based on score*/
- select anime_name, score, episodes, genres
-	from anime
-    where episodes != 1 and genres LIKE '%Comedy%'
-    order by score desc
-    limit 10;
+ SELECT anime_name, score, episodes, genres
+	FROM anime
+    WHERE episodes != 1 and genres LIKE '%Comedy%'
+    ORDER BY score DESC
+    LIMIT 10;
     
 /*9 Mention the total no of animes which started in each release dates*/
-select release_date, count(release_date) as no_of_animes
-from anime 
-group by release_date
-order by no_of_animes desc;
+SELECT release_date, COUNT(release_date) AS no_of_animes
+FROM anime 
+GROUP BY release_date
+ORDER BY no_of_animes DESC;
 
 /*10 Find a specific anime*/
-select *
-from anime 
-where anime_name LIKE '%Naruto%';
+SELECT *
+FROM anime 
+WHERE anime_name LIKE '%Naruto%';
 
-select *
-from anime 
-where anime_name LIKE '%One Piece%';
+SELECT *
+FROM anime 
+WHERE anime_name LIKE '%One Piece%';
 
 
 /*10 Find the anime with highest and lowest score*/
-select anime_name, score as top_score
-from anime
-where score = (select max(score) from anime);
+SELECT anime_name, score AS top_score
+FROM anime
+WHERE score = (SELECT max(score) FROM anime);
 
-select anime_name, score as lowest_score
-from anime
-where score = (select min(score) from anime where score != 0);
+SELECT anime_name, score AS lowest_score
+FROM anime
+WHERE score = (SELECT min(score) FROM anime WHERE score != 0);
     
 /*11 Determine most no. of episodes for anime series*/
 
-select episodes, count(anime_name) as no_of_animes
-from anime
-where episodes > 1
-group by episodes
-order by no_of_animes desc
-limit 10;
+SELECT episodes, COUNT(anime_name) AS no_of_animes
+FROM anime
+WHERE episodes > 1
+GROUP BY episodes
+ORDER BY no_of_animes DESC
+LIMIT 10;
 
     
